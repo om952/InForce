@@ -1,6 +1,6 @@
 from typing import Literal
 
-from pydantic import SecretStr
+from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -21,6 +21,8 @@ class Settings(BaseSettings):
     embedding_cache_dir: str = "data/models"
     lexical_model: str = "Qdrant/bm25"
     reranker_model: str = "Xenova/ms-marco-MiniLM-L-6-v2"
+    relevance_threshold: float = 2.0
+    max_escalations: int = Field(1, ge=0, le=1)
 
     qdrant_url: str | None = None
     qdrant_path: str = "data/qdrant"
